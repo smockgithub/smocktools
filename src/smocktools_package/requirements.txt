@@ -1,0 +1,4 @@
+sshtunnel
+pymysql
+
+# pip install -r requirements.txt
