@@ -125,37 +125,24 @@ class MysqlRepository:
     
     @mysql_retry_wrapper(max_retry=10,exception=(pymysql.Error,))
     def get(self,sql,params=None):
-        self._cursor()
-        if params == None:
-            self.cursor.execute(sql)
-        else:
-            self.cursor.execute(sql,params)
+        self.cursor.execute(sql,params)
         result = self.cursor.fetchall()
         return result
 
     @mysql_retry_wrapper(max_retry=10,exception=(pymysql.Error,))
     def add(self,sql,params=None):
-        self._cursor()
-        if params == None:
-            self.cursor.execute(sql)
-        else:
-            self.cursor.execute(sql,params)
+        self.cursor.execute(sql,params)
         self.conn.commit()
 
     @mysql_retry_wrapper(max_retry=10,exception=(pymysql.Error,))
     def add_many(self,sql,params):
-        self._cursor()
         for data in self.__list_split(params,10000):
             self.cursor.executemany(sql,data)
             self.conn.commit()
 
     @mysql_retry_wrapper(max_retry=10,exception=(pymysql.Error,))
     def update(self,sql,params=None):
-        self._cursor()
-        if params == None:
-            self.cursor.execute(sql)
-        else:
-            self.cursor.execute(sql,params)
+        self.cursor.execute(sql,params)
         self.conn.commit()
 
     
@@ -197,12 +184,8 @@ class MysqlRepository:
             self.update(str_a,None)
 
     def remove(self,sql,params=None):
-        self._cursor()
         self.cursor.execute(sql,params)
         self.conn.commit()
-
-
-    
 
     def __del__(self):
         if self.isSSH:
