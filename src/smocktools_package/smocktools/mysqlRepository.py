@@ -183,7 +183,8 @@ class MysqlRepository:
             str_a ='UPDATE `{tableName}` SET '.format(tableName=tableName) + ','.join(strb) + ' WHERE {keyName} in ({keyValue})'.format(keyName=keyName,keyValue=keyValue)
             self.update(str_a,None)
 
-    def remove(self,sql,params=None):
+    @mysql_retry_wrapper(max_retry=10,exception=(pymysql.Error,))
+    def delete(self,sql,params=None):
         self.cursor.execute(sql,params)
         self.conn.commit()
 
