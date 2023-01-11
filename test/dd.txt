@@ -1,0 +1,6 @@
+发布方式：
+https://packaging.python.org/en/latest/tutorials/packaging-projects/
+
+python setup.py sdist build
+
+twine upload dist/*

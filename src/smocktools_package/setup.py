@@ -5,7 +5,7 @@ with open("README.md", "r",encoding="utf-8") as fh:
 
 setuptools.setup(
   name="smocktools",
-  version="0.1.2",
+  version="0.1.3",
   author="smock",
   author_email="smockg@gmail.com",
   description="A package",
@@ -18,4 +18,6 @@ setuptools.setup(
   "License :: OSI Approved :: MIT License",
   "Operating System :: OS Independent",
   ],
+  install_requires=['sshtunnel', 'pymysql'],
+  python_requires='>=3'
 )
